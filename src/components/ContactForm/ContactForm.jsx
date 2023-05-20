@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import { FormStyle } from './ContactForm.styled';
 
 class ContactForm extends Component {
   state = {
@@ -37,10 +39,10 @@ class ContactForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <FormStyle.Form onSubmit={this.handleSubmit}>
+        <FormStyle.Label>
           Name:
-          <input
+          <FormStyle.Input
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -49,11 +51,11 @@ class ContactForm extends Component {
             value={name}
             onChange={this.handleChange}
           />
-        </label>
+        </FormStyle.Label>
 
-        <label>
+        <FormStyle.Label>
           Number:
-          <input
+          <FormStyle.Input
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -62,11 +64,22 @@ class ContactForm extends Component {
             value={number}
             onChange={this.handleChange}
           />
-        </label>
-        <button type="submit">Add Contact</button>
-      </form>
+        </FormStyle.Label>
+        <FormStyle.SubmitButton type="submit">
+          Add Contact
+        </FormStyle.SubmitButton>
+      </FormStyle.Form>
     );
   }
 }
-
+ContactForm.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  addContact: PropTypes.func.isRequired,
+};
 export default ContactForm;
