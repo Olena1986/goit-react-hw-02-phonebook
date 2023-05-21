@@ -4,12 +4,15 @@ import { FilterStyle } from './Filter.styled';
 
 const Filter = ({ value, onChange }) => {
   return (
-    <FilterStyle.FilterInput
-      type="text"
-      placeholder="Search"
-      value={value}
-      onChange={onChange}
-    />
+    <FilterStyle.FilterSubtitle>
+      Find contacts by name
+      <FilterStyle.FilterInput
+        type="text"
+        placeholder="Search"
+        value={value}
+        onChange={onChange}
+      />
+    </FilterStyle.FilterSubtitle>
   );
 };
 Filter.propTypes = {
